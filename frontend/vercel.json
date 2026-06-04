@@ -1,20 +1,4 @@
 {
   "version": 2,
-  "buildCommand": "ng build",
-  "outputDirectory": "dist/frontend/browser",
-  "functions": {
-    "dist/frontend/server/server.mjs": {
-      "runtime": "nodejs22.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "^/(.*\\.(js|css|ico|png|jpg|svg|woff2|woff|ttf|json))",
-      "dest": "/dist/frontend/browser/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/frontend/server/server.mjs"
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.csr.html" }]
 }
