@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "dist/frontend/server/server.mjs",
-      "use": "@vercel/node"
+  "buildCommand": "ng build",
+  "outputDirectory": "dist/frontend/browser",
+  "functions": {
+    "dist/frontend/server/server.mjs": {
+      "runtime": "nodejs22.x"
     }
-  ],
+  },
   "routes": [
     {
-      "src": "^/(.*\\.(js|css|ico|png|jpg|svg|woff2|woff|ttf|json|woff2))",
+      "src": "^/(.*\\.(js|css|ico|png|jpg|svg|woff2|woff|ttf|json))",
       "dest": "/dist/frontend/browser/$1"
     },
     {
