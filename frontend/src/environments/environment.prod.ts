@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://your-backend.onrender.com/api',
+  apiUrl: 'https://portfolio-angular-dgc5.onrender.com/api',
 };
