@@ -1,0 +1,45 @@
+<div class="profile-admin">
+  <h2>Profile Management</h2>
+
+  <div class="profile-tabs">
+    <button [class.active]="activeTab() === 'image'" (click)="activeTab.set('image')">
+      Profile Image
+    </button>
+
+    <button [class.active]="activeTab() === 'about'" (click)="activeTab.set('about')">About</button>
+
+    <button [class.active]="activeTab() === 'skills'" (click)="activeTab.set('skills')">
+      Skills
+    </button>
+
+    <button [class.active]="activeTab() === 'experience'" (click)="activeTab.set('experience')">
+      Experience
+    </button>
+
+    <button [class.active]="activeTab() === 'resume'" (click)="activeTab.set('resume')">
+      Resume
+    </button>
+  </div>
+
+  <div class="profile-content">
+    @if (activeTab() === 'image') {
+      <app-admin-profile />
+    }
+
+    @if (activeTab() === 'about') {
+      <app-admin-about />
+    }
+
+    @if (activeTab() === 'skills') {
+      <app-skill-list />
+    }
+
+    @if (activeTab() === 'experience') {
+      <app-experience-list />
+    }
+
+    @if (activeTab() === 'resume') {
+      <app-admin-resume />
+    }
+  </div>
+</div>

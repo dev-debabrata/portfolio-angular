@@ -1,0 +1,35 @@
+<div class="admin-about">
+  <h3>About Management</h3>
+
+  <label>Description</label>
+  <textarea
+    rows="7"
+    placeholder="Write about yourself..."
+    [ngModel]="description()"
+    (ngModelChange)="description.set($event)"
+  ></textarea>
+
+  <label>Email</label>
+  <input
+    type="email"
+    placeholder="Enter email"
+    [ngModel]="email()"
+    (ngModelChange)="email.set($event)"
+  />
+
+  <label>Location</label>
+  <input
+    type="text"
+    placeholder="Enter location"
+    [ngModel]="location()"
+    (ngModelChange)="location.set($event)"
+  />
+
+  <button (click)="saveAbout()" [disabled]="saving()">
+    {{ saving() ? 'Saving...' : 'Save About' }}
+  </button>
+
+  @if (message()) {
+    <p>{{ message() }}</p>
+  }
+</div>

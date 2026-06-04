@@ -1,0 +1,57 @@
+<section id="home" class="hero-section">
+  <div class="hero-container">
+    <div class="hero-content">
+      <h2 class="greeting">Hi, I'm</h2>
+
+      <h1 class="hero-name">
+        <span class="name-left">Debabrata</span>
+        <span class="name-right">Das</span>
+      </h1>
+
+      <h2 class="hero-role">MERN Stack Developer.</h2>
+
+      <p class="hero-description">
+        A passionate Angular Trainee at
+        <strong>Navigators Software Pvt. Ltd.</strong>
+        dedicated to creating dynamic and user-friendly web applications while continuously
+        improving frontend development skills.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#contact" class="btn primary-btn">
+          Contact Me
+          <i class="fa-regular fa-paper-plane"></i>
+        </a>
+
+        <a
+          [href]="resumeUrl()"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn secondary-btn"
+          [class.disabled]="!resumeUrl()"
+          [attr.title]="'Debabrata Das — Resume'"
+        >
+          View CV
+          <i class="fa-solid fa-download"></i>
+        </a>
+      </div>
+
+      <div class="hero-socials">
+        @for (item of socialLinks; track item.name) {
+          <a
+            [href]="item.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.aria-label]="item.name"
+          >
+            <i [class]="item.icon"></i>
+          </a>
+        }
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img [src]="profileImage()" alt="Debabrata Das" />
+    </div>
+  </div>
+</section>

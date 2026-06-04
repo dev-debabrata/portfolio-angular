@@ -1,0 +1,38 @@
+<div class="login-page">
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <p>Login to manage portfolio projects</p>
+
+    @if (errorMessage()) {
+      <div class="error">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <form (submit)="login(); $event.preventDefault()">
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          placeholder="Enter admin email"
+          [value]="email()"
+          (input)="email.set($any($event.target).value)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          placeholder="Enter password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+        />
+      </div>
+
+      <button type="submit" [disabled]="isLoading()">
+        {{ isLoading() ? 'Logging in...' : 'Login' }}
+      </button>
+    </form>
+  </div>
+</div>

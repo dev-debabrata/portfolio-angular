@@ -1,0 +1,33 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { ImageResponse, ResumeResponse } from '../../models/profile.model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProfileService {
+  private http = inject(HttpClient);
+  private apiUrl = `${environment.apiUrl}/profile`;
+
+  uploadProfileImage(file: File): Observable<ImageResponse> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post<ImageResponse>(`${this.apiUrl}/image`, formData);
+  }
+
+  getProfileImage(): Observable<ImageResponse> {
+    return this.http.get<ImageResponse>(`${this.apiUrl}/image`);
+  }
+
+  saveResumeUrl(resumeUrl: string): Observable<ResumeResponse> {
+    return this.http.post<ResumeResponse>(`${this.apiUrl}/resume`, {
+      resumeUrl,
+    });
+  }
+
+  getResumeUrl(): Observable<ResumeResponse> {
+    return this.http.get<ResumeResponse>(`${this.apiUrl}/resume`);
+  }
+}

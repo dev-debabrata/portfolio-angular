@@ -1,0 +1,28 @@
+<div class="sidebar">
+  <div class="logo">
+    <h2>Portfolio Admin</h2>
+  </div>
+
+  <ul class="menu">
+    <li routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Dashboard
+    </li>
+
+    <li routerLink="/admin/profile" routerLinkActive="active">Profile</li>
+
+    <li routerLink="/admin/projects" routerLinkActive="active">Projects</li>
+
+    <li routerLink="/admin/blogs" routerLinkActive="active">Blogs</li>
+
+    <!-- <li routerLink="/admin/experience" routerLinkActive="active">Experience</li>
+
+    <li routerLink="/admin/skills" routerLinkActive="active">Skills</li>
+    <li routerLink="/admin/profile" routerLinkActive="active">Profile Image</li>
+
+    <li routerLink="/admin/resume" routerLinkActive="active">Resume</li> -->
+  </ul>
+
+  <div class="logout">
+    <button (click)="logout()">Logout</button>
+  </div>
+</div>

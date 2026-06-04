@@ -1,0 +1,17 @@
+<div class="profile-upload">
+  <h3>Upload Profile Image</h3>
+
+  @if (previewUrl()) {
+    <img [src]="previewUrl()" alt="Preview" />
+  }
+
+  <input #fileInput type="file" accept="image/*" (change)="onFileSelect($event)" />
+
+  <button (click)="uploadProfileImage()" [disabled]="!selectedFile() || uploading()">
+    {{ uploading() ? 'Uploading...' : 'Upload Profile Image' }}
+  </button>
+
+  @if (message()) {
+    <p>{{ message() }}</p>
+  }
+</div>

@@ -1,0 +1,38 @@
+<footer class="footer">
+  <div class="footer-container">
+    <h2 class="footer-logo">
+      <a href="#home">
+        <span class="logo-left">&lt;Debabrata</span>
+        <span class="logo-right">Das /&gt;</span>
+      </a>
+    </h2>
+
+    <nav class="footer-nav">
+      @for (item of footerMenu; track item.id) {
+        <button type="button" (click)="handleNavigation(item)">
+          {{ item.name }}
+        </button>
+      }
+    </nav>
+
+    <div class="social-links">
+      @for (item of socialLinks; track item.name) {
+        <a
+          [href]="item.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          [attr.aria-label]="item.name"
+        >
+          <i [class]="item.icon"></i>
+        </a>
+      }
+    </div>
+
+    <p class="copyright">
+      © {{ currentYear }}
+      <span class="logo-left">&lt;Debabrata</span>
+      <span class="logo-right">Das /&gt;</span>
+      | All Rights Reserved
+    </p>
+  </div>
+</footer>

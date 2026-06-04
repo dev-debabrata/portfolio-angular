@@ -1,0 +1,88 @@
+.admin-about {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.admin-about h3 {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.admin-about label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.admin-about textarea,
+.admin-about input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.admin-about textarea {
+  resize: vertical;
+  min-height: 180px;
+}
+
+.admin-about textarea:focus,
+.admin-about input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.admin-about button {
+  display: block;
+  margin-left: auto;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-about button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.admin-about button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.admin-about p {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+@media (max-width: 768px) {
+  .admin-about {
+    padding: 16px;
+  }
+
+  .admin-about button {
+    width: 100%;
+    margin-left: 0;
+  }
+}

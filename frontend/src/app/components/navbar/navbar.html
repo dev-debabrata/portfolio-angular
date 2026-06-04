@@ -1,0 +1,91 @@
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="nav-container">
+    <a routerLink="/" class="logo">
+      <span class="logo-left">&lt;Debabrata</span>
+      <span class="logo-right">Das /&gt;</span>
+    </a>
+
+    <ul class="nav-links">
+      @for (item of navbarMenu; track item.id) {
+        <li [class.active]="activeSection === item.id">
+          <button (click)="handleNavigation(item)">
+            {{ item.title }}
+            <span></span>
+          </button>
+        </li>
+      }
+    </ul>
+
+    <!-- Desktop Theme -->
+    <button class="theme-btn desktop-theme" (click)="toggleTheme()">
+      {{ isDark ? '🌙' : '☀️' }}
+    </button>
+
+    <!-- Mobile Right Side -->
+    <div class="mobile-actions">
+      <button class="theme-btn" (click)="toggleTheme()">
+        {{ isDark ? '🌙' : '☀️' }}
+      </button>
+
+      <button class="menu-btn" (click)="toggleMenu()">
+        {{ isOpen ? '✕' : '☰' }}
+      </button>
+    </div>
+
+    @if (isOpen) {
+      <div class="mobile-menu">
+        <ul>
+          @for (item of navbarMenu; track item.id) {
+            <li [class.active]="activeSection === item.id">
+              <button (click)="handleNavigation(item)">
+                {{ item.title }}
+              </button>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</nav>
+
+<!-- <nav class="navbar">
+  <div class="logo">
+    <a routerLink="/">Debabrata Das</a>
+  </div>
+
+  <ul class="nav-links">
+    <li>
+      <a href="#home">Home</a>
+    </li>
+
+    <li>
+      <a href="#about">About</a>
+    </li>
+
+    <li>
+      <a href="#skills">Skills</a>
+    </li>
+
+    <li>
+      <a href="#experience">Experience</a>
+    </li>
+
+    <li>
+      <a href="#projects">Projects</a>
+    </li>
+
+    <li>
+      <a href="#blogs">Blogs</a>
+    </li>
+
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+  </ul>
+
+  <div class="nav-actions">
+    <a href="/assets/resume/Debabrata-Das-Resume.pdf" target="_blank" class="resume-btn">
+      Resume
+    </a>
+  </div>
+</nav> -->

@@ -1,1 +1,73 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --navbar-bg: rgba(255, 255, 255, 0.9);
+  --card-bg: #f8fafc;
+
+  --logo-start: #111827;
+  --logo-middle: #6b7280;
+}
+
+html.dark-theme {
+  --bg-color: #0f172a;
+  --text-color: #f8fafc;
+  --navbar-bg: rgba(15, 23, 42, 0.9);
+  --card-bg: #1e293b;
+
+  --logo-start: #ffffff;
+  --logo-middle: #d1d5db;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* background: linear-gradient(135deg, #0f172a, #1e293b, #111827); */
+  /* background: #0f172a;
+  color: #f8fafc; */
+
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.snackbar-success .mdc-snackbar__surface {
+  background-color: white !important;
+  color: #4caf50 !important;
+}
+
+.snackbar-error .mdc-snackbar__surface {
+  background-color: white !important;
+  color: #f44336 !important;
+}
+
+.snackbar-success .mat-mdc-snack-bar-action,
+.snackbar-error .mat-mdc-snack-bar-action {
+  color: #000 !important;
+  opacity: 0.9;
+}
+
+.snackbar-success .mat-mdc-snack-bar-action:hover,
+.snackbar-error .mat-mdc-snack-bar-action:hover {
+  opacity: 1;
+}
+
+.cdk-overlay-container {
+  z-index: 1200 !important;
+}
+
+/* html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+} */
