@@ -1,4 +1,14 @@
 .page-content {
-  min-height: 100%;
+  min-height: 100vh;
   padding-top: 72px;
+}
+
+/* prevent flicker on admin pages before Angular boots */
+[data-admin='true'] app-navbar,
+[data-admin='true'] app-footer {
+  display: none !important;
+}
+
+[data-admin='true'] .page-content {
+  padding-top: 0 !important;
 }

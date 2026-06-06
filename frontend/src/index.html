@@ -11,6 +11,12 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <script>
+      if (window.location.pathname.startsWith('/admin')) {
+        document.documentElement.setAttribute('data-admin', 'true');
+      }
+    </script>
   </head>
   <body>
     <app-root></app-root>
