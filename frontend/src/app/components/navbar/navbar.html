@@ -18,17 +18,17 @@
 
     <!-- Desktop Theme -->
     <button class="theme-btn desktop-theme" (click)="toggleTheme()">
-      {{ isDark ? '🌙' : '☀️' }}
+      <lucide-icon [name]="isDark ? 'moon' : 'sun'" [size]="20"></lucide-icon>
     </button>
 
     <!-- Mobile Right Side -->
     <div class="mobile-actions">
       <button class="theme-btn" (click)="toggleTheme()">
-        {{ isDark ? '🌙' : '☀️' }}
+        <lucide-icon [name]="isDark ? 'moon' : 'sun'" [size]="20"></lucide-icon>
       </button>
 
       <button class="menu-btn" (click)="toggleMenu()">
-        {{ isOpen ? '✕' : '☰' }}
+        <lucide-icon [name]="isOpen ? 'x' : 'menu'" [size]="20"></lucide-icon>
       </button>
     </div>
 
@@ -47,45 +47,3 @@
     }
   </div>
 </nav>
-
-<!-- <nav class="navbar">
-  <div class="logo">
-    <a routerLink="/">Debabrata Das</a>
-  </div>
-
-  <ul class="nav-links">
-    <li>
-      <a href="#home">Home</a>
-    </li>
-
-    <li>
-      <a href="#about">About</a>
-    </li>
-
-    <li>
-      <a href="#skills">Skills</a>
-    </li>
-
-    <li>
-      <a href="#experience">Experience</a>
-    </li>
-
-    <li>
-      <a href="#projects">Projects</a>
-    </li>
-
-    <li>
-      <a href="#blogs">Blogs</a>
-    </li>
-
-    <li>
-      <a href="#contact">Contact</a>
-    </li>
-  </ul>
-
-  <div class="nav-actions">
-    <a href="/assets/resume/Debabrata-Das-Resume.pdf" target="_blank" class="resume-btn">
-      Resume
-    </a>
-  </div>
-</nav> -->

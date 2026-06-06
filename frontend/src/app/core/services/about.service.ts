@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { About } from '../../models/about.model';
+import { AboutResponse, AboutSaveResponse } from '../../models/about.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +12,11 @@ export class AboutService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/about`;
 
-  saveAbout(data: About): Observable<{ message: string; about: About }> {
-    return this.http.post<{ message: string; about: About }>(this.apiUrl, data);
+  saveAbout(data: AboutResponse): Observable<AboutSaveResponse> {
+    return this.http.post<AboutSaveResponse>(this.apiUrl, data);
   }
 
-  getAbout(): Observable<About> {
-    return this.http.get<About>(this.apiUrl);
+  getAbout(): Observable<AboutResponse> {
+    return this.http.get<AboutResponse>(this.apiUrl);
   }
 }

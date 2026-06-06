@@ -1,5 +1,5 @@
 .admin-about {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 24px;
   background: #fff;
@@ -8,6 +8,7 @@
 }
 
 .admin-about h3 {
+  margin: 0;
   margin-bottom: 24px;
   font-size: 1.5rem;
   color: #222;
@@ -74,6 +75,23 @@
   background: #f0fdf4;
   color: #166534;
   border: 1px solid #bbf7d0;
+}
+
+.input-box {
+  display: flex;
+  gap: 2rem;
+}
+
+.input-box .input-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 0.75rem;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

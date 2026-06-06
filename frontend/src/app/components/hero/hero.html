@@ -1,21 +1,25 @@
 <section id="home" class="hero-section">
   <div class="hero-container">
     <div class="hero-content">
-      <h2 class="greeting">Hi, I'm</h2>
+      <h2 class="greeting">
+        {{ heroContent().greeting }}
+      </h2>
 
       <h1 class="hero-name">
-        <span class="name-left">Debabrata</span>
-        <span class="name-right">Das</span>
+        <span class="name-left">
+          {{ heroContent().firstName }}
+        </span>
+
+        <span class="name-right">
+          {{ heroContent().lastName }}
+        </span>
       </h1>
 
-      <h2 class="hero-role">MERN Stack Developer.</h2>
+      <h2 class="hero-role">
+        {{ heroContent().role }}
+      </h2>
 
-      <p class="hero-description">
-        A passionate Angular Trainee at
-        <strong>Navigators Software Pvt. Ltd.</strong>
-        dedicated to creating dynamic and user-friendly web applications while continuously
-        improving frontend development skills.
-      </p>
+      <p class="hero-description" [innerHTML]="heroContent().profileDescription"></p>
 
       <div class="hero-buttons">
         <a href="#contact" class="btn primary-btn">
@@ -31,7 +35,7 @@
           [class.disabled]="!resumeUrl()"
           [attr.title]="'Debabrata Das — Resume'"
         >
-          View CV
+          Download CV
           <i class="fa-solid fa-download"></i>
         </a>
       </div>
@@ -51,7 +55,7 @@
     </div>
 
     <div class="hero-image">
-      <img [src]="profileImage()" alt="Debabrata Das" />
+      <img [src]="heroContent().imageUrl" alt="Debabrata Das" />
     </div>
   </div>
 </section>

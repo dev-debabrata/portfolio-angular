@@ -1,8 +1,33 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { ApiResponse, Project, ProjectSaveResponse } from '../../models/project.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  
+  private http = inject(HttpClient);
+  private apiUrl = `${environment.apiUrl}/projects`;
+
+  createProject(formData: FormData): Observable<ProjectSaveResponse> {
+    return this.http.post<ProjectSaveResponse>(this.apiUrl, formData);
+  }
+
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.apiUrl);
+  }
+
+  getProjectById(id: string): Observable<Project> {
+    return this.http.get<Project>(`${this.apiUrl}/${id}`);
+  }
+
+  updateProject(id: string, formData: FormData): Observable<ProjectSaveResponse> {
+    return this.http.put<ProjectSaveResponse>(`${this.apiUrl}/${id}`, formData);
+  }
+
+  deleteProject(id: string): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${this.apiUrl}/${id}`);
+  }
 }

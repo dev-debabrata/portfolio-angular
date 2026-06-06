@@ -15,10 +15,6 @@
     <button [class.active]="activeTab() === 'experience'" (click)="activeTab.set('experience')">
       Experience
     </button>
-
-    <button [class.active]="activeTab() === 'resume'" (click)="activeTab.set('resume')">
-      Resume
-    </button>
   </div>
 
   <div class="profile-content">
@@ -31,15 +27,11 @@
     }
 
     @if (activeTab() === 'skills') {
-      <app-skill-list />
+      <app-admin-skill-list />
     }
 
     @if (activeTab() === 'experience') {
       <app-experience-list />
-    }
-
-    @if (activeTab() === 'resume') {
-      <app-admin-resume />
     }
   </div>
 </div>

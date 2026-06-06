@@ -2,7 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ImageResponse, ResumeResponse } from '../../models/profile.model';
+import {
+  ProfileForm,
+  ProfileImageResponse,
+  ProfileResponse,
+  ProfileSaveResponse,
+  ResumeResponse,
+} from '../../models/profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +17,34 @@ export class ProfileService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/profile`;
 
-  uploadProfileImage(file: File): Observable<ImageResponse> {
+  uploadProfileImage(file: File): Observable<ProfileImageResponse> {
     const formData = new FormData();
     formData.append('image', file);
-    return this.http.post<ImageResponse>(`${this.apiUrl}/image`, formData);
+    return this.http.post<ProfileImageResponse>(`${this.apiUrl}/image`, formData);
   }
 
-  getProfileImage(): Observable<ImageResponse> {
-    return this.http.get<ImageResponse>(`${this.apiUrl}/image`);
+  updateProfileContent(data: ProfileForm): Observable<ProfileSaveResponse> {
+    return this.http.put<ProfileSaveResponse>(this.apiUrl, data);
+  }
+
+  // updateProfileContent(data: {
+  //   greeting: string;
+  //   firstName: string;
+  //   lastName: string;
+  //   role: string;
+  //   profileDescription: string;
+  // }) {
+  //   return this.http.put(`${this.apiUrl}/profile-content`, data);
+  // }
+
+  // updateProfileContent(profileDescription: string): Observable<ProfileResponse> {
+  //   return this.http.put<ProfileResponse>(`${this.apiUrl}/profile-content`, {
+  //     profileDescription,
+  //   });
+  // }
+
+  getProfile(): Observable<ProfileResponse> {
+    return this.http.get<ProfileResponse>(this.apiUrl);
   }
 
   saveResumeUrl(resumeUrl: string): Observable<ResumeResponse> {

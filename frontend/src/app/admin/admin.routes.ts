@@ -7,7 +7,7 @@ import { adminGuard } from '../core/guards/admin-guard';
 import { AdminLogin } from './admin-login/admin-login';
 import { BlogList } from './blogs/blog-list/blog-list';
 import { ExperienceList } from './experiences/experience-list/experience-list';
-import { SkillList } from './skills/skill-list/skill-list';
+
 import { AdminProjectList } from './projects/admin-project-list/admin-project-list';
 
 // import { ProjectForm } from './projects/project-form/project-form';

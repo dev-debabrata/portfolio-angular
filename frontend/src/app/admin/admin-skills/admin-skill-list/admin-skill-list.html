@@ -1,0 +1,36 @@
+<div class="admin-skill-list">
+  <div class="header">
+    <h2>Skills</h2>
+
+    <button type="button" (click)="openForm()">Add Skill</button>
+  </div>
+
+  <div class="skills-list">
+    @for (skill of skills(); track skill._id) {
+      <div class="skill-card">
+        <a class="skill-link" [href]="skill.websiteUrl" target="_blank">
+          <img [src]="skill.imageUrl" [alt]="skill.name" />
+
+          <h3>{{ skill.name }}</h3>
+          <p>{{ skill.category }}</p>
+        </a>
+        <button class="delete-btn" type="button" (click)="deleteSkill(skill._id!)">
+          <lucide-icon name="Trash2" size="18"></lucide-icon>
+        </button>
+        <!-- <button class="delete-btn" type="button" (click)="deleteSkill(skill._id!)">Delete</button> -->
+      </div>
+    }
+  </div>
+
+  @if (showForm()) {
+    <div class="popup-overlay">
+      <div class="popup-box">
+        <button class="close-btn" type="button" (click)="closeForm()">
+          <lucide-icon name="X"></lucide-icon>
+        </button>
+
+        <app-admin-skill-form (closeForm)="closeForm($event)"></app-admin-skill-form>
+      </div>
+    </div>
+  }
+</div>

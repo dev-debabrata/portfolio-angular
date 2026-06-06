@@ -1,13 +1,14 @@
 import { Component, HostListener, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { LucideAngularModule } from 'lucide-angular';
 
 import { NAVBAR_MENU } from '../../portfolio-data';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, LucideAngularModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
@@ -45,48 +46,31 @@ export class Navbar implements OnInit {
 
   handleNavigation(item: any) {
     this.isOpen = false;
+    this.activeSection = item.id;
 
     if (item.type === 'route') {
-      this.activeSection = item.id;
-      this.router.navigate([item.id]);
+      if (item.id === 'home') {
+        this.router.navigate(['/']);
+        return;
+      }
+
+      this.router.navigate([`/${item.id}`]);
       return;
     }
-
-    this.activeSection = item.id;
 
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
 
-    document.getElementById(item.id)?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => {
+        document.getElementById(item.id)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100);
     });
   }
-
-  // scrollToSection(id: string) {
-  //   this.activeSection = id;
-  //   this.isOpen = false;
-
-  //   if (!isPlatformBrowser(this.platformId)) {
-  //     return;
-  //   }
-
-  //   document.getElementById(id)?.scrollIntoView({
-  //     behavior: 'smooth',
-  //     block: 'start',
-  //   });
-  // }
-
-  // toggleTheme() {
-  //   this.isDark = !this.isDark;
-
-  //   if (this.isDark) {
-  //     document.body.classList.add('dark-theme');
-  //   } else {
-  //     document.body.classList.remove('dark-theme');
-  //   }
-  // }
 
   toggleTheme() {
     if (!isPlatformBrowser(this.platformId)) {

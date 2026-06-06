@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SkillList } from './skill-list';
+import { AdminSkillForm } from './admin-skill-form';
 
-describe('SkillList', () => {
-  let component: SkillList;
-  let fixture: ComponentFixture<SkillList>;
+describe('AdminSkillForm', () => {
+  let component: AdminSkillForm;
+  let fixture: ComponentFixture<AdminSkillForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SkillList]
+      imports: [AdminSkillForm]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SkillList);
+    fixture = TestBed.createComponent(AdminSkillForm);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

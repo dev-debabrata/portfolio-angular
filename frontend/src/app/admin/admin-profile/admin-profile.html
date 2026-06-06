@@ -1,4 +1,101 @@
 <div class="profile-upload">
+  <!-- @if (message()) {
+    <p>{{ message() }}</p>
+  } -->
+  <div class="profile-img">
+    <div>
+      <h3>Upload Profile Image</h3>
+
+      @if (previewUrl()) {
+        <img [src]="previewUrl()" alt="Preview" />
+      }
+
+      <input #fileInput type="file" accept="image/*" (change)="onFileSelect($event)" />
+
+      <button (click)="uploadProfileImage()" [disabled]="!selectedFile() || uploading()">
+        {{ uploading() ? 'Uploading...' : 'Upload Profile Image' }}
+      </button>
+    </div>
+
+    <div>
+      <h3>Resume Management</h3>
+
+      <input
+        class="resume"
+        type="text"
+        placeholder="Paste Google Drive resume link..."
+        [value]="resumeUrl()"
+        (input)="resumeUrl.set($any($event.target).value)"
+      />
+
+      <button (click)="saveResume()" [disabled]="saving()">
+        {{ saving() ? 'Saving...' : 'Save Resume Link' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <h3>Hero Content</h3>
+
+    <div class="input-box">
+      <div>
+        <label for="Greeting">Greeting</label>
+        <input
+          type="text"
+          placeholder="Greeting"
+          [value]="profileForm().greeting"
+          (input)="updateField('greeting', $any($event.target).value)"
+        />
+      </div>
+
+      <div>
+        <label for="">First Name</label>
+        <input
+          type="text"
+          placeholder="First Name"
+          [value]="profileForm().firstName"
+          (input)="updateField('firstName', $any($event.target).value)"
+        />
+      </div>
+
+      <div>
+        <label for="">Last Name</label>
+        <input
+          type="text"
+          placeholder="Last Name"
+          [value]="profileForm().lastName"
+          (input)="updateField('lastName', $any($event.target).value)"
+        />
+      </div>
+
+      <div>
+        <label for="">Role</label>
+        <input
+          type="text"
+          placeholder="Role"
+          [value]="profileForm().role"
+          (input)="updateField('role', $any($event.target).value)"
+        />
+      </div>
+    </div>
+
+    <div>
+      <label for="">Description</label>
+      <textarea
+        rows="4"
+        placeholder="Enter profile description"
+        [value]="profileForm().profileDescription"
+        (input)="updateField('profileDescription', $any($event.target).value)"
+      ></textarea>
+    </div>
+
+    <button (click)="saveProfileContent()" [disabled]="savingContent()">
+      {{ savingContent() ? 'Saving...' : 'Save Hero Content' }}
+    </button>
+  </div>
+</div>
+
+<!-- <div class="profile-upload">
   <h3>Upload Profile Image</h3>
 
   @if (previewUrl()) {
@@ -14,4 +111,15 @@
   @if (message()) {
     <p>{{ message() }}</p>
   }
-</div>
+
+  <textarea
+    rows="5"
+    placeholder="Enter profile description"
+    [value]="profileContent()"
+    (input)="profileContent.set($any($event.target).value)"
+  ></textarea>
+
+  <button (click)="uploadDescription()" [disabled]="savingDescription()">
+    {{ savingDescription() ? 'Saving...' : 'Save Description' }}
+  </button>
+</div> -->

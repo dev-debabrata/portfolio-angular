@@ -1,5 +1,5 @@
 .sidebar {
-  width: 300px;
+  width: 250px;
   min-height: 100vh;
   background-color: #0f172a;
   color: white;
@@ -40,7 +40,7 @@
 }
 
 .logout {
-  padding: 20px;
+  padding: 2rem;
   border-top: 1px solid #1e293b;
 }
 
@@ -52,4 +52,8 @@
   color: white;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.logout button:hover {
+  background: #dc2626d3;
 }

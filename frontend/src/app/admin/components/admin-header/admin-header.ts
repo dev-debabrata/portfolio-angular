@@ -1,5 +1,7 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { AdminService } from '../../../core/services/admin.service';
+import { forkJoin } from 'rxjs';
+import { ProfileService } from '../../../core/services/profile.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -10,22 +12,35 @@ import { AdminService } from '../../../core/services/admin.service';
 })
 export class AdminHeader implements OnInit {
   private adminService = inject(AdminService);
+  private profileService = inject(ProfileService);
   private destroyRef = inject(DestroyRef);
 
-  adminName = 'Admin';
+  adminName = signal('Admin');
+  avatarUrl = signal('https://ui-avatars.com/api/?name=Admin');
 
-  ngOnInit() {
-    const sub = this.adminService.getProfile().subscribe({
-      next: (res: any) => {
-        this.adminName = res.admin?.name || 'Admin';
+  ngOnInit(): void {
+    const profileSub = forkJoin({
+      profileName: this.adminService.getProfile(),
+      profileImage: this.profileService.getProfile(),
+    }).subscribe({
+      next: ({ profileName, profileImage }) => {
+        this.adminName.set((profileName as any).admin?.name || 'Admin');
+
+        if (profileImage.imageUrl) {
+          this.avatarUrl.set(profileImage.imageUrl);
+        } else {
+          this.avatarUrl.set(
+            `https://ui-avatars.com/api/?name=${encodeURIComponent(this.adminName())}`,
+          );
+        }
       },
       error: () => {
-        this.adminName = 'Admin';
+        this.adminName.set('Admin');
       },
     });
 
     this.destroyRef.onDestroy(() => {
-      sub.unsubscribe();
+      profileSub.unsubscribe();
     });
   }
 }

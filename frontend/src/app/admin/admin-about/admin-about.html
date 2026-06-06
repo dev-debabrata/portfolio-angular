@@ -3,33 +3,35 @@
 
   <label>Description</label>
   <textarea
-    rows="7"
+    rows="8"
     placeholder="Write about yourself..."
-    [ngModel]="description()"
-    (ngModelChange)="description.set($event)"
+    [value]="aboutForm().description"
+    (input)="updateField('description', $any($event.target).value)"
   ></textarea>
 
-  <label>Email</label>
-  <input
-    type="email"
-    placeholder="Enter email"
-    [ngModel]="email()"
-    (ngModelChange)="email.set($event)"
-  />
+  <div class="input-box">
+    <div class="input-item">
+      <label>Email</label>
+      <input
+        type="email"
+        placeholder="Enter email"
+        [value]="aboutForm().email"
+        (input)="updateField('email', $any($event.target).value)"
+      />
+    </div>
 
-  <label>Location</label>
-  <input
-    type="text"
-    placeholder="Enter location"
-    [ngModel]="location()"
-    (ngModelChange)="location.set($event)"
-  />
+    <div class="input-item">
+      <label>Location</label>
+      <input
+        type="text"
+        placeholder="Enter location"
+        [value]="aboutForm().location"
+        (input)="updateField('location', $any($event.target).value)"
+      />
+    </div>
+  </div>
 
   <button (click)="saveAbout()" [disabled]="saving()">
     {{ saving() ? 'Saving...' : 'Save About' }}
   </button>
-
-  @if (message()) {
-    <p>{{ message() }}</p>
-  }
 </div>

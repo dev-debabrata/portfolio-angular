@@ -4,9 +4,8 @@
   </div>
 
   <div class="header-right">
-    <span class="admin-name">Hello, {{ adminName }}</span>
-    <!-- <span class="admin-name"> Debabrata Das</span> -->
+    <span class="admin-name">Hello, {{ adminName() }}</span>
 
-    <img src="https://ui-avatars.com/api/?name=Debabrata+Das" alt="Admin" class="avatar" />
+    <img [src]="avatarUrl()" alt="Admin" class="avatar" />
   </div>
 </header>

@@ -1,0 +1,38 @@
+<form class="skill-form" (submit)="$event.preventDefault(); submitSkill()">
+  <h3>Add Skill</h3>
+
+  <label>Skill Name</label>
+  <input
+    type="text"
+    placeholder="Angular"
+    [value]="skillForm().name"
+    (input)="updateField('name', $any($event.target).value)"
+  />
+
+  <label>Website URL</label>
+  <input
+    type="text"
+    placeholder="https://angular.dev"
+    [value]="skillForm().websiteUrl"
+    (input)="updateField('websiteUrl', $any($event.target).value)"
+  />
+
+  <label>Category</label>
+  <input
+    type="text"
+    placeholder="Frontend"
+    [value]="skillForm().category"
+    (input)="updateField('category', $any($event.target).value)"
+  />
+
+  <label>Skill Image</label>
+  <input type="file" accept="image/*" (change)="onImageSelect($event)" />
+
+  @if (imagePreview()) {
+    <img class="preview" [src]="imagePreview()" alt="Preview" />
+  }
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Saving...' : 'Save Skill' }}
+  </button>
+</form>

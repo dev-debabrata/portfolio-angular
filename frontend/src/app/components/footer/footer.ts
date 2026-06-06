@@ -22,7 +22,12 @@ export class Footer {
 
   handleNavigation(item: any) {
     if (item.type === 'route') {
-      this.router.navigate([item.id]);
+      if (item.id === 'home') {
+        this.router.navigate(['/']);
+        return;
+      }
+
+      this.router.navigate([`/${item.id}`]);
       return;
     }
 
@@ -30,16 +35,18 @@ export class Footer {
       return;
     }
 
-    document.getElementById(item.id)?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
+    this.router.navigate(['/']).then(() => {
+      setTimeout(() => {
+        document.getElementById(item.id)?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100);
     });
-  }
 
-  // scrollToSection(id: string) {
-  //   document.getElementById(id)?.scrollIntoView({
-  //     behavior: 'smooth',
-  //     block: 'start',
-  //   });
-  // }
+    // document.getElementById(item.id)?.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'start',
+    // });
+  }
 }
