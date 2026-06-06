@@ -2,18 +2,28 @@ import express from "express";
 import { uploadProfile } from "../middleware/upload.js";
 import {
   uploadProfileImage,
-  getProfileImage,
   saveResumeLink,
   getResumeLink,
+  getProfile,
+  updateProfileContent,
 } from "../controllers/profile.controller.js";
 
 const router = express.Router();
 
-// Profile image
-router.post("/image", uploadProfile.single("image"), uploadProfileImage);
-router.get("/image", getProfileImage);
+// Profile
+router.get("/", getProfile);
+router.put("/", updateProfileContent);
 
-// Resume link
+router.post("/image", uploadProfile.single("image"), uploadProfileImage);
+// router.post(
+//   "/profile-image",
+//   uploadProfile.single("image"),
+//   uploadProfileImage,
+// );
+// router.put("/profile-content", updateProfileContent);
+// router.get("/", getProfile);
+
+// Resume
 router.post("/resume", saveResumeLink);
 router.get("/resume", getResumeLink);
 

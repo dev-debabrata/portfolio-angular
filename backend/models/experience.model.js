@@ -1,30 +1,28 @@
 import mongoose from "mongoose";
 
-const skillSchema = new mongoose.Schema(
+const experienceSchema = new mongoose.Schema(
   {
-    name: {
+    company: {
       type: String,
       required: true,
       trim: true,
     },
 
-    imageUrl: {
+    role: {
       type: String,
       required: true,
-    },
-
-    websiteUrl: {
-      type: String,
       trim: true,
-      default: "",
     },
 
-    category: {
+    years: {
       type: String,
-      default: "Frontend",
+      required: true,
+      trim: true,
     },
   },
   { timestamps: true },
 );
 
-export default mongoose.model("Skills", skillSchema);
+const Experience = mongoose.model("Experience", experienceSchema);
+
+export default Experience;

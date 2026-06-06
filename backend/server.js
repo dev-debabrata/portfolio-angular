@@ -5,11 +5,10 @@ import { connectDB } from "./config/db.js";
 import adminRoutes from "./routes/admin.route.js";
 import aboutRoutes from "./routes/about.route.js";
 import skillRoutes from "./routes/skills.route.js";
-// import resumeRoutes from "./routes/resume.route.js";
+import experienceRoutes from "./routes/experience.route.js";
 import profileRoutes from "./routes/profile.route.js";
-// import projectRoutes from "./routes/project.route.js";
+import projectRoutes from "./routes/project.route.js";
 // import contactRoutes from "./routes/contact.route.js";
-import uploadRoutes from "./routes/upload.route.js";
 // import blogRoutes from "./routes/blog.route.js";
 
 dotenv.config();
@@ -27,15 +26,12 @@ app.use(
 );
 
 app.use("/api/admin", adminRoutes);
-
 app.use("/api/about", aboutRoutes);
-
 app.use("/api/profile", profileRoutes);
-// app.use("/api/resume", resumeRoutes);
 app.use("/api/skills", skillRoutes);
-// app.use("/api/projects", projectRoutes);
+app.use("/api/experiences", experienceRoutes);
+app.use("/api/projects", projectRoutes);
 // app.use("/api/contact", contactRoutes);
-app.use("/api/upload", uploadRoutes);
 // app.use("/api/blogs", blogRoutes);
 
 const startServer = async () => {

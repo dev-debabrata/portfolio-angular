@@ -3,13 +3,19 @@ import Resume from "../models/resume.model.js";
 
 export const uploadProfileImage = async (req, res) => {
   try {
-    await Profile.deleteMany({});
+    let profile = await Profile.findOne();
 
-    const profile = await Profile.create({
-      imageUrl: req.file.path,
-    });
+    if (!profile) {
+      profile = await Profile.create({
+        imageUrl: req.file.path,
+      });
+    } else {
+      profile.imageUrl = req.file.path;
+      await profile.save();
+    }
 
     res.json({
+      message: "Profile image updated",
       imageUrl: profile.imageUrl,
     });
   } catch (error) {
@@ -17,25 +23,126 @@ export const uploadProfileImage = async (req, res) => {
   }
 };
 
-export const getProfileImage = async (req, res) => {
+export const updateProfileContent = async (req, res) => {
   try {
-    const profile = await Profile.findOne().sort({
-      createdAt: -1,
+    const { greeting, firstName, lastName, role, profileDescription } =
+      req.body;
+
+    let profile = await Profile.findOne();
+
+    if (!profile) {
+      profile = await Profile.create({
+        greeting,
+        firstName,
+        lastName,
+        role,
+        profileDescription,
+      });
+    } else {
+      profile.greeting = greeting;
+      profile.firstName = firstName;
+      profile.lastName = lastName;
+      profile.role = role;
+      profile.profileDescription = profileDescription;
+
+      await profile.save();
+    }
+
+    res.json({
+      message: "Profile content updated",
+      profile,
     });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getProfile = async (req, res) => {
+  try {
+    const profile = await Profile.findOne();
 
     if (!profile) {
       return res.status(404).json({
-        message: "No profile image found",
+        message: "No profile found",
       });
     }
 
     res.json({
       imageUrl: profile.imageUrl,
+      greeting: profile.greeting,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      role: profile.role,
+      profileDescription: profile.profileDescription,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+// import Profile from "../models/profile.model.js";
+// import Resume from "../models/resume.model.js";
+
+// export const uploadProfileImage = async (req, res) => {
+//   try {
+//     await Profile.deleteMany({});
+
+//     const profile = await Profile.create({
+//       imageUrl: req.file.path,
+//     });
+
+//     res.json({
+//       imageUrl: profile.imageUrl,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+// export const updateProfileDescription = async (req, res) => {
+//   try {
+//     const { profileDescription } = req.body;
+
+//     let profile = await Profile.findOne();
+
+//     if (!profile) {
+//       profile = await Profile.create({
+//         profileDescription,
+//       });
+//     } else {
+//       profile.profileDescription = profileDescription;
+//       await profile.save();
+//     }
+
+//     res.json({
+//       message: "Profile description updated",
+//       profileDescription: profile.profileDescription,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
+
+// export const getProfile = async (req, res) => {
+//   try {
+//     const profile = await Profile.findOne().sort({
+//       createdAt: -1,
+//     });
+
+//     if (!profile) {
+//       return res.status(404).json({
+//         message: "No profile image found",
+//       });
+//     }
+
+//     res.json({
+//       imageUrl: profile.imageUrl,
+//       profileDescription: profile.profileDescription,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error" });
+//   }
+// };
 
 export const saveResumeLink = async (req, res) => {
   try {
