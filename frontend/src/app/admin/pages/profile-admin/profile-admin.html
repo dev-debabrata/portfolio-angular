@@ -15,6 +15,10 @@
     <button [class.active]="activeTab() === 'experience'" (click)="activeTab.set('experience')">
       Experience
     </button>
+
+    <button [class.active]="activeTab() === 'education'" (click)="activeTab.set('education')">
+      Education
+    </button>
   </div>
 
   <div class="profile-content">
@@ -32,6 +36,10 @@
 
     @if (activeTab() === 'experience') {
       <app-admin-experience-list />
+    }
+
+    @if (activeTab() === 'education') {
+      <app-admin-education-list />
     }
   </div>
 </div>
