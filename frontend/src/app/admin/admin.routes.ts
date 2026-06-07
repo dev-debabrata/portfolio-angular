@@ -1,14 +1,10 @@
 import { Routes } from '@angular/router';
 
 import { AdminLayout } from './layout/admin-layout/admin-layout';
-import { Dashboard } from './dashboard/dashboard';
-
 import { adminGuard } from '../core/guards/admin-guard';
-import { AdminLogin } from './admin-login/admin-login';
-import { BlogList } from './blogs/blog-list/blog-list';
-import { ExperienceList } from './experiences/experience-list/experience-list';
-
-import { AdminProjectList } from './projects/admin-project-list/admin-project-list';
+import { AdminLogin } from './auth/admin-login/admin-login';
+import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
+import { AdminProjectList } from './pages/projects-admin/admin-project-list/admin-project-list';
 
 // import { ProjectForm } from './projects/project-form/project-form';
 // import { ProjectEdit } from './projects/project-edit/project-edit';
@@ -34,7 +30,7 @@ export const ADMIN_ROUTES: Routes = [
       },
       {
         path: 'dashboard',
-        component: Dashboard,
+        component: DashboardAdmin,
       },
 
       // {
@@ -52,7 +48,7 @@ export const ADMIN_ROUTES: Routes = [
           {
             path: 'add-project',
             loadComponent: () =>
-              import('./projects/admin-project-form/admin-project-form').then(
+              import('./pages/projects-admin/admin-project-form/admin-project-form').then(
                 (m) => m.AdminProjectForm,
               ),
           },
@@ -60,7 +56,7 @@ export const ADMIN_ROUTES: Routes = [
           {
             path: 'edit/:id',
             loadComponent: () =>
-              import('./projects/admin-project-form/admin-project-form').then(
+              import('./pages/projects-admin/admin-project-form/admin-project-form').then(
                 (m) => m.AdminProjectForm,
               ),
           },
@@ -68,12 +64,16 @@ export const ADMIN_ROUTES: Routes = [
       },
       {
         path: 'blogs',
-        loadComponent: () => import('./blogs/blog-list/blog-list').then((m) => m.BlogList),
+        loadComponent: () =>
+          import('./pages/blogs-admin/admin-blog-list/admin-blog-list').then(
+            (m) => m.AdminBlogList,
+          ),
       },
 
       {
         path: 'profile',
-        loadComponent: () => import('./profile-admin/profile-admin').then((m) => m.ProfileAdmin),
+        loadComponent: () =>
+          import('./pages/profile-admin/profile-admin').then((m) => m.ProfileAdmin),
       },
       // {
       //   path: 'experience',

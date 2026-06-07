@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 
 import { HomePage } from './pages/home.page/home.page';
-import { BlogList } from './admin/blogs/blog-list/blog-list';
+
 import { ProjectsListPage } from './pages/projects/projects-list.page/projects-list.page';
+import { BlogListPage } from './pages/blogs/blog-list.page/blog-list.page';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: BlogList,
+        component: BlogListPage,
       },
 
       {
