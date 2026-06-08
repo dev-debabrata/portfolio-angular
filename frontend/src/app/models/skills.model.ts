@@ -6,11 +6,17 @@ export interface SkillResponse {
   category: string;
 }
 
+export interface SkillFormData {
+  name: string;
+  websiteUrl: string;
+  category: string;
+}
+
 export interface SkillSaveResponse {
   message: string;
   skill: SkillResponse;
 }
 
-export interface ApiResponse {
+export interface SkillApiResponse {
   message: string;
 }

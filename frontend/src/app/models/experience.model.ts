@@ -18,6 +18,6 @@ export interface ExperienceSaveResponse {
   experience: ExperienceResponse;
 }
 
-export interface ApiResponse {
+export interface ExperienceApiResponse {
   message: string;
 }
