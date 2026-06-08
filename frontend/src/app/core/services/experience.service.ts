@@ -20,13 +20,13 @@ export class ExperienceService {
     return this.http.post<ExperienceSaveResponse>(this.apiUrl, data);
   }
 
-  getExperiences(): Observable<ExperienceResponse> {
-    return this.http.get<ExperienceResponse>(this.apiUrl);
+  getExperiences(): Observable<ExperienceResponse[]> {
+    return this.http.get<ExperienceResponse[]>(this.apiUrl);
   }
 
-  getExperienceById(id: string): Observable<ExperienceResponse> {
-    return this.http.get<ExperienceResponse>(`${this.apiUrl}/${id}`);
-  }
+  // getExperienceById(id: string): Observable<ExperienceResponse> {
+  //   return this.http.get<ExperienceResponse>(`${this.apiUrl}/${id}`);
+  // }
 
   updateExperience(id: string, data: ExperienceForm): Observable<ExperienceSaveResponse> {
     return this.http.put<ExperienceSaveResponse>(`${this.apiUrl}/${id}`, data);
