@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ApiResponse, SkillResponse, SkillSaveResponse } from '../../models/skills.model';
+import { SkillApiResponse, SkillResponse, SkillSaveResponse } from '../../models/skills.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class SkillsService {
   //   return this.http.put<SkillSaveResponse>(`${this.apiUrl}/${id}`, data);
   // }
 
-  deleteSkill(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${this.apiUrl}/${id}`);
+  deleteSkill(id: string): Observable<SkillApiResponse> {
+    return this.http.delete<SkillApiResponse>(`${this.apiUrl}/${id}`);
   }
 }

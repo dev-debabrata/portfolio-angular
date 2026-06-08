@@ -1,1 +1,33 @@
-<p>skills works!</p>
+<section id="skills" class="skills-section">
+  <div class="section-title">
+    <h1>Skills</h1>
+    <div></div>
+  </div>
+
+  <div class="skills-wrapper">
+    @for (group of categorySkills(); track group.category) {
+      <div class="skill-card">
+        <div class="skill-card-inner">
+          <h3>{{ group.category }}</h3>
+
+          <div class="skill-grid">
+            @for (skill of group.list; track skill._id) {
+              <a
+                class="skill-item"
+                [href]="skill.websiteUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div class="skill-icon">
+                  <img [src]="skill.imageUrl" [alt]="skill.name" />
+                </div>
+
+                <p>{{ skill.name }}</p>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

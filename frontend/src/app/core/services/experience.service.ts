@@ -3,11 +3,11 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import {
+  ExperienceApiResponse,
   ExperienceForm,
   ExperienceResponse,
   ExperienceSaveResponse,
 } from '../../models/experience.model';
-import { ApiResponse } from '../../models/skills.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,7 @@ export class ExperienceService {
     return this.http.put<ExperienceSaveResponse>(`${this.apiUrl}/${id}`, data);
   }
 
-  deleteExperience(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${this.apiUrl}/${id}`);
+  deleteExperience(id: string): Observable<ExperienceApiResponse> {
+    return this.http.delete<ExperienceApiResponse>(`${this.apiUrl}/${id}`);
   }
 }
