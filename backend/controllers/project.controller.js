@@ -5,8 +5,31 @@ export const createProject = async (req, res) => {
     const { title, description, category, technologies, liveUrl, githubUrl } =
       req.body;
 
+    if (!title || !description || !category) {
+      return res
+        .status(400)
+        .json({ message: "All required fields are missing" });
+      // return res.status(400).json({
+      //   message: "Title, description and category are required",
+      // });
+    }
+
     if (!req.file) {
-      return res.status(400).json({ message: "Project image is required" });
+      return res.status(400).json({
+        message: "Project image is required",
+      });
+    }
+
+    let parsedTechnologies = [];
+
+    if (technologies) {
+      try {
+        parsedTechnologies = JSON.parse(technologies);
+      } catch {
+        return res.status(400).json({
+          message: "Invalid technologies format",
+        });
+      }
     }
 
     const project = await Project.create({
@@ -14,7 +37,7 @@ export const createProject = async (req, res) => {
       description,
       category,
       image: req.file.path,
-      technologies: technologies ? JSON.parse(technologies) : [],
+      technologies: parsedTechnologies,
       liveUrl,
       githubUrl,
     });
@@ -24,9 +47,40 @@ export const createProject = async (req, res) => {
       project,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error });
+    res.status(500).json({
+      message: "Server error",
+      error: error.message,
+    });
   }
 };
+
+// export const createProject = async (req, res) => {
+//   try {
+//     const { title, description, category, technologies, liveUrl, githubUrl } =
+//       req.body;
+
+//     if (!req.file) {
+//       return res.status(400).json({ message: "Project image is required" });
+//     }
+
+//     const project = await Project.create({
+//       title,
+//       description,
+//       category,
+//       image: req.file.path,
+//       technologies: technologies ? JSON.parse(technologies) : [],
+//       liveUrl,
+//       githubUrl,
+//     });
+
+//     res.status(201).json({
+//       message: "Project created successfully",
+//       project,
+//     });
+//   } catch (error) {
+//     res.status(500).json({ message: "Server error", error });
+//   }
+// };
 
 export const getProjects = async (req, res) => {
   try {
@@ -65,15 +119,24 @@ export const updateProject = async (req, res) => {
     };
 
     if (technologies) {
-      updateData.technologies = JSON.parse(technologies);
+      try {
+        updateData.technologies = JSON.parse(technologies);
+      } catch {
+        return res.status(400).json({ message: "Invalid technologies format" });
+      }
     }
+
+    // if (technologies) {
+    //   updateData.technologies = JSON.parse(technologies);
+    // }
 
     if (req.file) {
       updateData.image = req.file.path;
     }
 
     const project = await Project.findByIdAndUpdate(req.params.id, updateData, {
-      new: true,
+      // new: true,
+      returnDocument: "after",
     });
 
     if (!project) {
