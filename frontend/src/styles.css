@@ -18,6 +18,12 @@ html.dark-theme {
   --logo-middle: #d1d5db;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;

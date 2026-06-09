@@ -1,1 +1,31 @@
-<p>admin-education-form works!</p>
+<form class="education-form" (submit)="$event.preventDefault(); submitEducation()">
+  <h3>{{ editData() ? 'Edit Education' : 'Add Education' }}</h3>
+
+  <label>School/College</label>
+  <input
+    type="text"
+    placeholder="School/College name"
+    [value]="educationForm().school"
+    (input)="updateField('school', $any($event.target).value)"
+  />
+
+  <label>Depertment</label>
+  <input
+    type="text"
+    placeholder="Name of Depertment"
+    [value]="educationForm().degree"
+    (input)="updateField('degree', $any($event.target).value)"
+  />
+
+  <label>Years</label>
+  <input
+    type="text"
+    placeholder="Aug 2023 - Sep 2024"
+    [value]="educationForm().years"
+    (input)="updateField('years', $any($event.target).value)"
+  />
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Saving...' : editData() ? 'Update Education' : 'Save Education' }}
+  </button>
+</form>

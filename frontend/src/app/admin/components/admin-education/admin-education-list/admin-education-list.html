@@ -1,1 +1,46 @@
-<p>admin-education-list works!</p>
+<div class="admin-education-list">
+  <div class="header">
+    <h2>Education</h2>
+
+    <button type="button" (click)="openForm()">Add Education</button>
+  </div>
+
+  <div class="education-list">
+    @for (education of educations(); track education._id) {
+      <div class="education-card">
+        <div class="education-info">
+          <h3>{{ education.school }}</h3>
+
+          <p class="degree">
+            {{ education.degree }}
+          </p>
+
+          <p class="years">
+            {{ education.years }}
+          </p>
+        </div>
+
+        <div class="action-buttons">
+          <button type="button" (click)="openForm(education)">Edit</button>
+
+          <button class="delete-btn" type="button" (click)="deleteEducation(education._id!)">
+            <lucide-icon name="Trash2" size="18"></lucide-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (showForm()) {
+    <div class="popup-overlay" (click)="closeForm()">
+      <div class="popup-box" (click)="$event.stopPropagation()">
+        <button class="close-btn" type="button" (click)="closeForm()">
+          <lucide-icon name="X"></lucide-icon>
+        </button>
+
+        <app-admin-education-form [editData]="editingEducation()" (closeForm)="closeForm($event)">
+        </app-admin-education-form>
+      </div>
+    </div>
+  }
+</div>
