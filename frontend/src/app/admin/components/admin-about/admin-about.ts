@@ -1,8 +1,9 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { AboutService } from '../../../core/services/about.service';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
+import { AboutForm } from '../../../models/about.model';
 
 @Component({
   selector: 'app-admin-about',
@@ -18,21 +19,37 @@ export class AdminAbout implements OnInit {
 
   saving = signal(false);
 
-  aboutForm = signal({
+  originalAboutForm = signal<AboutForm | null>(null);
+
+  aboutForm = signal<AboutForm>({
     description: '',
     email: '',
     location: '',
   });
 
+  isAboutChanged = computed(() => {
+    return JSON.stringify(this.aboutForm()) !== JSON.stringify(this.originalAboutForm());
+  });
+
   ngOnInit() {
     const aboutSub = this.aboutService.getAbout().subscribe({
       next: (res) => {
-        this.aboutForm.set({
+        const formData = {
           description: res.description,
           email: res.email,
           location: res.location,
-        });
+        };
+
+        this.aboutForm.set(formData);
+        this.originalAboutForm.set(formData);
       },
+      // next: (res) => {
+      //   this.aboutForm.set({
+      //     description: res.description,
+      //     email: res.email,
+      //     location: res.location,
+      //   });
+      // },
       error: () => {
         console.log('No about data found');
       },
@@ -63,6 +80,7 @@ export class AdminAbout implements OnInit {
     const saveAboutSub = this.aboutService.saveAbout(form).subscribe({
       next: (res) => {
         this.snackBarService.success(res.message);
+        this.originalAboutForm.set(this.aboutForm());
         this.saving.set(false);
       },
       error: (err) => {

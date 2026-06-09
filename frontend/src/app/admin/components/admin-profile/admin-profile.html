@@ -89,7 +89,7 @@
       ></textarea>
     </div>
 
-    <button (click)="saveProfileContent()" [disabled]="savingContent()">
+    <button (click)="saveProfileContent()" [disabled]="savingContent() || !isProfileChanged()">
       {{ savingContent() ? 'Saving...' : 'Save Hero Content' }}
     </button>
   </div>

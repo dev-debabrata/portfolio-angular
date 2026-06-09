@@ -1,4 +1,12 @@
-import { Component, DestroyRef, ElementRef, inject, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  ElementRef,
+  inject,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { ProfileService } from '../../../core/services/profile.service';
 import { SnackBarService } from '../../../core/services/snack-bar.service';
 import { ProfileForm } from '../../../models/profile.model';
@@ -21,6 +29,7 @@ export class AdminProfile {
   uploading = signal(false);
   savingContent = signal(false);
   previewUrl = signal<string | null>(null);
+  originalProfileForm = signal<ProfileForm | null>(null);
 
   resumeUrl = signal('');
   saving = signal(false);
@@ -34,17 +43,38 @@ export class AdminProfile {
     profileDescription: '',
   });
 
+  isProfileChanged = computed(() => {
+    const original = this.originalProfileForm();
+    const current = this.profileForm();
+
+    if (!original) return false;
+
+    return JSON.stringify(original) !== JSON.stringify(current);
+  });
+
   ngOnInit() {
     const profileSub = this.profileService.getProfile().subscribe({
       next: (res) => {
-        this.profileForm.set({
+        const formData = {
           greeting: res.greeting,
           firstName: res.firstName,
           lastName: res.lastName,
           role: res.role,
           profileDescription: res.profileDescription,
-        });
+        };
+
+        this.profileForm.set(formData);
+        this.originalProfileForm.set(formData);
       },
+      // next: (res) => {
+      //   this.profileForm.set({
+      //     greeting: res.greeting,
+      //     firstName: res.firstName,
+      //     lastName: res.lastName,
+      //     role: res.role,
+      //     profileDescription: res.profileDescription,
+      //   });
+      // },
       error: () => {
         console.log('No profile data found');
       },
@@ -145,6 +175,7 @@ export class AdminProfile {
       next: () => {
         this.snackBarService.success('Profile content updated successfully!');
         this.savingContent.set(false);
+        this.originalProfileForm.set(this.profileForm());
       },
       error: () => {
         this.snackBarService.error('Profile content update failed!');
