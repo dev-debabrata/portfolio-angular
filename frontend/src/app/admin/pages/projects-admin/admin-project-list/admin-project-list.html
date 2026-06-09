@@ -1,1 +1,62 @@
-<p>admin-project-list works!</p>
+<div class="project-list">
+  <div class="header">
+    <h2>Projects</h2>
+
+    <button (click)="addProject()">Add Project</button>
+  </div>
+
+  <div class="project-scroll">
+    @if (loading()) {
+      <p>Loading...</p>
+    } @else {
+      <div class="cards">
+        @for (project of projects(); track project._id) {
+          <div class="card">
+            <div class="project-category">
+              {{ project.category | uppercase }}
+            </div>
+            <div class="image-wrapper">
+              <img [src]="project.image" [alt]="project.title" />
+
+              <button class="view-project-btn" (click)="viewProject(project._id)">
+                <lucide-icon name="link-2" [size]="22"></lucide-icon>
+              </button>
+            </div>
+            <!-- <img [src]="project.image" [alt]="project.title" /> -->
+
+            <div class="card-content">
+              <h3>{{ project.title }}</h3>
+
+              <!-- <p>{{ project.category }}</p> -->
+
+              <div class="tech-list">
+                @for (tech of project.technologies; track tech) {
+                  <span>{{ tech }}</span>
+                }
+              </div>
+
+              <div class="actions">
+                <button (click)="editProject(project._id)">Edit</button>
+
+                <button class="delete-btn" (click)="deleteProject(project._id)">Delete</button>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card">
+          <img [src]="project.image" [alt]="project.title" />
+
+          <h3>{{ project.title }}</h3>
+
+          <p>{{ project.category }}</p>
+
+          <div class="actions">
+            <button (click)="editProject(project._id)">Edit</button>
+
+            <button class="delete-btn" (click)="deleteProject(project._id)">Delete</button>
+          </div>
+        </div> -->
+        }
+      </div>
+    }
+  </div>
+</div>

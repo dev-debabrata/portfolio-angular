@@ -1,0 +1,45 @@
+@if (project()) {
+  <div class="project-detail">
+    <img
+      [src]="project()?.image"
+      alt="project image"
+      class="project-image"
+      (click)="imagePopup.set(true)"
+    />
+
+    <div class="project-content">
+      <h2>{{ project()?.title }}</h2>
+
+      <p class="category">{{ project()?.category }}</p>
+
+      <p class="description">
+        {{ project()?.description }}
+      </p>
+
+      <div class="tech-list">
+        @for (tech of project()?.technologies; track tech) {
+          <span class="tech-badge">{{ tech }}</span>
+        }
+      </div>
+
+      <div class="project-links">
+        <a [href]="project()?.liveUrl" target="_blank">Live Project</a>
+
+        <a [href]="project()?.githubUrl" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </div>
+}
+
+@if (imagePopup()) {
+  <div class="image-popup" (click)="imagePopup.set(false)">
+    <button class="close-btn" (click)="imagePopup.set(false)">×</button>
+
+    <img
+      [src]="project()?.image"
+      alt="project full image"
+      class="popup-image"
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+}

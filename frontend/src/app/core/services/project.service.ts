@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { ApiResponse, Project, ProjectSaveResponse } from '../../models/project.model';
+import { Project, ProjectApiResponse, ProjectSaveResponse } from '../../models/project.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class ProjectService {
     return this.http.put<ProjectSaveResponse>(`${this.apiUrl}/${id}`, formData);
   }
 
-  deleteProject(id: string): Observable<ApiResponse> {
-    return this.http.delete<ApiResponse>(`${this.apiUrl}/${id}`);
+  deleteProject(id: string): Observable<ProjectApiResponse> {
+    return this.http.delete<ProjectApiResponse>(`${this.apiUrl}/${id}`);
   }
 }

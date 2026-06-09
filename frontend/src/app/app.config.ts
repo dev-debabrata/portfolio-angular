@@ -20,6 +20,7 @@ import {
   Mail,
   MapPin,
   LogOut,
+  Link2,
 } from 'lucide-angular';
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
 
     importProvidersFrom(
-      LucideAngularModule.pick({ Sun, Moon, Menu, X, Trash2, Mail, MapPin, LogOut }),
+      LucideAngularModule.pick({ Sun, Moon, Menu, X, Trash2, Mail, MapPin, LogOut, Link2 }),
     ),
   ],
 };

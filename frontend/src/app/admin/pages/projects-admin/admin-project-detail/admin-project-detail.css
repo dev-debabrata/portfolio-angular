@@ -1,0 +1,153 @@
+.project-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+.project-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+  padding: 2rem;
+}
+
+.project-content {
+  padding: 2rem;
+}
+
+.project-content h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #111827;
+}
+
+.category {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.4rem 1rem;
+  background: #eff6ff;
+  color: #2563eb;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.description {
+  margin-top: 1.5rem;
+  color: #4b5563;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.tech-badge {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.project-links a {
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.project-links a:first-child {
+  background: #2563eb;
+  color: white;
+}
+
+.project-links a:first-child:hover {
+  background: #1d4ed8;
+}
+
+.project-links a:last-child {
+  background: #111827;
+  color: white;
+}
+
+.project-links a:last-child:hover {
+  background: #000;
+}
+
+.project-image {
+  cursor: zoom-in;
+}
+
+.image-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.popup-image {
+  max-width: 85%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.close-btn {
+  position: absolute;
+  top: 50px;
+  right: 90px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #111827;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .project-image {
+    height: 250px;
+  }
+
+  .project-content {
+    padding: 1.25rem;
+  }
+
+  .project-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
+
+  .project-links a {
+    text-align: center;
+  }
+}

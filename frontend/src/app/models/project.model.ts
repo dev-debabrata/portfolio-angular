@@ -1,5 +1,5 @@
 export interface Project {
-  _id?: string;
+  _id: string;
   title: string;
   description: string;
   category: string;
@@ -16,7 +16,7 @@ export interface ProjectSaveResponse {
   project: Project;
 }
 
-export interface ApiResponse {
+export interface ProjectApiResponse {
   message: string;
 }
 
