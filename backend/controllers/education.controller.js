@@ -37,7 +37,7 @@ export const updateEducation = async (req, res) => {
         const education = await Education.findByIdAndUpdate(
             req.params.id,
             req.body,
-            { new: true },
+            { returnDocument: "after" },
         );
 
         if (!education) {

@@ -42,7 +42,7 @@ export const updateExperience = async (req, res) => {
     const experience = await Experience.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true },
+      { returnDocument: "after" },
     );
 
     if (!experience) {
