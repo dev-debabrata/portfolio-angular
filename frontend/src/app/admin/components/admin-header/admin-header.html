@@ -4,8 +4,13 @@
   </div>
 
   <div class="header-right">
-    <span class="admin-name">Hello, {{ adminName() }}</span>
-
-    <img [src]="avatarUrl()" alt="Admin" class="avatar" />
+    <!-- <span class="admin-name">Hello, {{ adminName() }}</span> -->
+    @if (adminName()) {
+      <span class="admin-name">Hello, {{ adminName() }}</span>
+    }
+    @if (imageUrl()) {
+      <img [src]="imageUrl()" [alt]="adminName()" class="avatar" />
+    }
+    <!-- <img [src]="avatarUrl()" alt="Admin" class="avatar" /> -->
   </div>
 </header>

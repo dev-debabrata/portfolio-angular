@@ -11,31 +11,23 @@ import { ProfileService } from '../../../core/services/profile.service';
   styleUrl: './admin-header.css',
 })
 export class AdminHeader implements OnInit {
-  private adminService = inject(AdminService);
   private profileService = inject(ProfileService);
   private destroyRef = inject(DestroyRef);
 
-  adminName = signal('Admin');
-  avatarUrl = signal('https://ui-avatars.com/api/?name=Admin');
+  adminName = signal('');
+  imageUrl = signal('');
 
   ngOnInit(): void {
-    const profileSub = forkJoin({
-      profileName: this.adminService.getProfile(),
-      profileImage: this.profileService.getProfile(),
-    }).subscribe({
-      next: ({ profileName, profileImage }) => {
-        this.adminName.set((profileName as any).admin?.name || 'Admin');
+    const profileSub = this.profileService.getProfile().subscribe({
+      next: (profile) => {
+        const fullName = `${profile.firstName} ${profile.lastName}`;
 
-        if (profileImage.imageUrl) {
-          this.avatarUrl.set(profileImage.imageUrl);
-        } else {
-          this.avatarUrl.set(
-            `https://ui-avatars.com/api/?name=${encodeURIComponent(this.adminName())}`,
-          );
-        }
+        this.adminName.set(fullName);
+        this.imageUrl.set(profile.imageUrl || '');
       },
       error: () => {
-        this.adminName.set('Admin');
+        this.adminName.set('');
+        this.imageUrl.set('');
       },
     });
 
@@ -43,4 +35,36 @@ export class AdminHeader implements OnInit {
       profileSub.unsubscribe();
     });
   }
+  // private adminService = inject(AdminService);
+  // private profileService = inject(ProfileService);
+  // private destroyRef = inject(DestroyRef);
+
+  // adminName = signal('Admin');
+  // avatarUrl = signal('https://ui-avatars.com/api/?name=Admin');
+
+  // ngOnInit(): void {
+  //   const profileSub = forkJoin({
+  //     profileName: this.adminService.getProfile(),
+  //     profileImage: this.profileService.getProfile(),
+  //   }).subscribe({
+  //     next: ({ profileName, profileImage }) => {
+  //       this.adminName.set((profileName as any).admin?.name || 'Admin');
+
+  //       if (profileImage.imageUrl) {
+  //         this.avatarUrl.set(profileImage.imageUrl);
+  //       } else {
+  //         this.avatarUrl.set(
+  //           `https://ui-avatars.com/api/?name=${encodeURIComponent(this.adminName())}`,
+  //         );
+  //       }
+  //     },
+  //     error: () => {
+  //       this.adminName.set('Admin');
+  //     },
+  //   });
+
+  //   this.destroyRef.onDestroy(() => {
+  //     profileSub.unsubscribe();
+  //   });
+  // }
 }
