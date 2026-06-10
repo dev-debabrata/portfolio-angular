@@ -1,7 +1,19 @@
+.admin-skill-list {
+  padding: 1rem;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #222;
 }
 
 .header button {
@@ -74,6 +86,33 @@
   top: 10px;
   right: 10px;
   margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #fee2e2;
+  color: #dc2626;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+  transform: scale(1.05);
+}
+
+/* .delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-top: 0;
   border: none;
   background: #dc2626;
   color: white;
@@ -88,7 +127,7 @@
 
 .delete-btn:hover {
   background: #b91c1c;
-}
+} */
 
 .skill-card img {
   width: 80px;

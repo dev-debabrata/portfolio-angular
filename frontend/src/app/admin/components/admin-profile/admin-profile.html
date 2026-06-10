@@ -1,4 +1,5 @@
 <div class="profile-upload">
+  <h2>Profile Content</h2>
   <!-- @if (message()) {
     <p>{{ message() }}</p>
   } -->
@@ -94,32 +95,3 @@
     </button>
   </div>
 </div>
-
-<!-- <div class="profile-upload">
-  <h3>Upload Profile Image</h3>
-
-  @if (previewUrl()) {
-    <img [src]="previewUrl()" alt="Preview" />
-  }
-
-  <input #fileInput type="file" accept="image/*" (change)="onFileSelect($event)" />
-
-  <button (click)="uploadProfileImage()" [disabled]="!selectedFile() || uploading()">
-    {{ uploading() ? 'Uploading...' : 'Upload Profile Image' }}
-  </button>
-
-  @if (message()) {
-    <p>{{ message() }}</p>
-  }
-
-  <textarea
-    rows="5"
-    placeholder="Enter profile description"
-    [value]="profileContent()"
-    (input)="profileContent.set($any($event.target).value)"
-  ></textarea>
-
-  <button (click)="uploadDescription()" [disabled]="savingDescription()">
-    {{ savingDescription() ? 'Saving...' : 'Save Description' }}
-  </button>
-</div> -->

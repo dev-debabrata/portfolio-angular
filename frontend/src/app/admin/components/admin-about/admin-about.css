@@ -1,17 +1,13 @@
 .admin-about {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 24px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  padding: 1rem;
 }
 
-.admin-about h3 {
+.admin-about h2 {
   margin: 0;
-  margin-bottom: 24px;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-width: 700;
   color: #222;
+  margin-bottom: 2rem;
 }
 
 .admin-about label {
