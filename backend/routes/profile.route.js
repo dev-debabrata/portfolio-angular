@@ -13,15 +13,7 @@ const router = express.Router();
 // Profile
 router.get("/", getProfile);
 router.put("/", updateProfileContent);
-
 router.post("/image", uploadProfile.single("image"), uploadProfileImage);
-// router.post(
-//   "/profile-image",
-//   uploadProfile.single("image"),
-//   uploadProfileImage,
-// );
-// router.put("/profile-content", updateProfileContent);
-// router.get("/", getProfile);
 
 // Resume
 router.post("/resume", saveResumeLink);

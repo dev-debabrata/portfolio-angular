@@ -88,7 +88,7 @@ export const createSkill = async (req, res) => {
 
 export const getSkills = async (req, res) => {
   try {
-    const skills = await Skill.find().sort({ createdAt: 1 });
+    const skills = await Skill.find().sort({ createdAt: -1 });
 
     res.json(skills);
   } catch (error) {
