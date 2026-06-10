@@ -5,7 +5,7 @@ import { LucideAngularModule } from 'lucide-angular';
 
 import { ProjectService } from '../../../../core/services/project.service';
 import { SnackBarService } from '../../../../core/services/snack-bar.service';
-import { Project } from '../../../../models/project.model';
+import { ProjectResponse } from '../../../../models/project.model';
 
 @Component({
   selector: 'app-admin-project-list',
@@ -20,7 +20,7 @@ export class AdminProjectList implements OnInit {
   private snackBarService = inject(SnackBarService);
   private destroyRef = inject(DestroyRef);
 
-  projects = signal<Project[]>([]);
+  projects = signal<ProjectResponse[]>([]);
   loading = signal(false);
 
   ngOnInit(): void {

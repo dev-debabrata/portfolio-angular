@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { Project, ProjectApiResponse, ProjectSaveResponse } from '../../models/project.model';
+import {
+  ProjectApiResponse,
+  ProjectResponse,
+  ProjectSaveResponse,
+} from '../../models/project.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +19,12 @@ export class ProjectService {
     return this.http.post<ProjectSaveResponse>(this.apiUrl, formData);
   }
 
-  getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.apiUrl);
+  getProjects(): Observable<ProjectResponse[]> {
+    return this.http.get<ProjectResponse[]>(this.apiUrl);
   }
 
-  getProjectById(id: string): Observable<Project> {
-    return this.http.get<Project>(`${this.apiUrl}/${id}`);
+  getProjectById(id: string): Observable<ProjectResponse> {
+    return this.http.get<ProjectResponse>(`${this.apiUrl}/${id}`);
   }
 
   updateProject(id: string, formData: FormData): Observable<ProjectSaveResponse> {

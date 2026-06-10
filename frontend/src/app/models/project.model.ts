@@ -1,4 +1,4 @@
-export interface Project {
+export interface ProjectResponse {
   _id: string;
   title: string;
   description: string;
@@ -13,7 +13,7 @@ export interface Project {
 
 export interface ProjectSaveResponse {
   message: string;
-  project: Project;
+  project: ProjectResponse;
 }
 
 export interface ProjectApiResponse {

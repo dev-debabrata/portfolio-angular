@@ -1,6 +1,7 @@
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
+import { EMPTY, switchMap } from 'rxjs';
 
 import { ProjectService } from '../../../../core/services/project.service';
 import { SnackBarService } from '../../../../core/services/snack-bar.service';
@@ -36,14 +37,19 @@ export class AdminProjectForm implements OnInit {
   });
 
   ngOnInit(): void {
-    const routeSub = this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
+    const projectSub = this.route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const id = params.get('id');
 
-      if (!id) return;
+          if (!id) return EMPTY;
 
-      this.editingId.set(id);
+          this.editingId.set(id);
 
-      const projectSub = this.projectService.getProjectById(id).subscribe({
+          return this.projectService.getProjectById(id);
+        }),
+      )
+      .subscribe({
         next: (project) => {
           this.projects.set({
             title: project.title,
@@ -63,17 +69,52 @@ export class AdminProjectForm implements OnInit {
         },
       });
 
-      this.destroyRef.onDestroy(() => {
-        projectSub.unsubscribe();
-      });
-    });
-
     this.destroyRef.onDestroy(() => {
-      routeSub.unsubscribe();
+      projectSub.unsubscribe();
     });
   }
 
-  updateField(field: keyof ProjectForm, value: string) {
+  // ngOnInit(): void {
+  //   const routeSub = this.route.paramMap.subscribe((params) => {
+  //     const id = params.get('id');
+
+  //     if (!id) return;
+
+  //     this.editingId.set(id);
+
+  //     const projectSub = this.projectService.getProjectById(id).subscribe({
+  //       next: (project) => {
+  //         this.projects.set({
+  //           title: project.title,
+  //           description: project.description,
+  //           category: project.category,
+  //           imageFile: null,
+  //           technologies: project.technologies || [],
+  //           liveUrl: project.liveUrl || '',
+  //           githubUrl: project.githubUrl || '',
+  //         });
+
+  //         this.imagePreview.set(project.image);
+  //       },
+  //       error: (err) => {
+  //         this.snackBarService.error(err.error?.message || 'Project not found');
+  //         this.router.navigate(['/admin/projects']);
+  //       },
+  //     });
+
+  //     this.destroyRef.onDestroy(() => {
+  //       projectSub.unsubscribe();
+  //     });
+  //   });
+
+  //   this.destroyRef.onDestroy(() => {
+  //     routeSub.unsubscribe();
+  //   });
+  // }
+
+  // updateField(field: keyof ProjectForm, value: string) {
+
+  updateField<K extends keyof ProjectForm>(field: K, value: ProjectForm[K]) {
     this.projects.update((project) => ({
       ...project,
       [field]: value,
@@ -174,38 +215,3 @@ export class AdminProjectForm implements OnInit {
     });
   }
 }
-
-// ngOnInit() {
-//   const id = this.route.snapshot.paramMap.get('id');
-
-//   if (id) {
-//     this.editingId.set(id);
-//     this.getProjectById(id);
-//   }
-// }
-
-// getProjectById(id: string) {
-//   const proSub = this.projectService.getProjectById(id).subscribe({
-//     next: (project) => {
-//       this.projects.set({
-//         title: project.title,
-//         description: project.description,
-//         category: project.category,
-//         imageFile: null,
-//         technologies: project.technologies || [],
-//         liveUrl: project.liveUrl || '',
-//         githubUrl: project.githubUrl || '',
-//       });
-
-//       this.imagePreview.set(project.image);
-//     },
-//     error: () => {
-//       this.snackBarService.error('Project not found');
-//       this.router.navigate(['/admin/projects']);
-//     },
-//   });
-
-//   this.destroyRef.onDestroy(() => {
-//     proSub.unsubscribe();
-//   });
-// }
