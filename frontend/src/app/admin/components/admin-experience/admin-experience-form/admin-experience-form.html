@@ -1,1 +1,31 @@
-<p>admin-experience-form works!</p>
+<form class="experience-form" (submit)="$event.preventDefault(); submitExperience()">
+  <h3>{{ editData() ? 'Edit Experience' : 'Add Experience' }}</h3>
+
+  <label>Company</label>
+  <input
+    type="text"
+    placeholder="Company name"
+    [value]="experienceForm().company"
+    (input)="updateField('company', $any($event.target).value)"
+  />
+
+  <label>Role</label>
+  <input
+    type="text"
+    placeholder="Frontend Developer"
+    [value]="experienceForm().role"
+    (input)="updateField('role', $any($event.target).value)"
+  />
+
+  <label>Years</label>
+  <input
+    type="text"
+    placeholder="Aug 2023 - Sep 2024"
+    [value]="experienceForm().years"
+    (input)="updateField('years', $any($event.target).value)"
+  />
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Saving...' : editData() ? 'Update Experience' : 'Save Experience' }}
+  </button>
+</form>

@@ -1,1 +1,46 @@
-<p>admin-experience-list works!</p>
+<div class="admin-experience-list">
+  <div class="header">
+    <h2>Experience</h2>
+
+    <button type="button" (click)="openForm()">Add Experience</button>
+  </div>
+
+  <div class="experience-list">
+    @for (experience of experiences(); track experience._id) {
+      <div class="experience-card">
+        <div class="experience-info">
+          <h3>{{ experience.company }}</h3>
+
+          <p class="role">
+            {{ experience.role }}
+          </p>
+
+          <p class="years">
+            {{ experience.years }}
+          </p>
+        </div>
+
+        <div class="action-buttons">
+          <button type="button" (click)="openForm(experience)">Edit</button>
+
+          <button class="delete-btn" type="button" (click)="deleteExperience(experience._id!)">
+            <lucide-icon name="Trash2" size="18"></lucide-icon>
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (showForm()) {
+    <div class="popup-overlay" (click)="closeForm()">
+      <div class="popup-box" (click)="$event.stopPropagation()">
+        <button class="close-btn" type="button" (click)="closeForm()">
+          <lucide-icon name="X"></lucide-icon>
+        </button>
+
+        <app-admin-experience-form [editData]="editingExperience()" (closeForm)="closeForm($event)">
+        </app-admin-experience-form>
+      </div>
+    </div>
+  }
+</div>
