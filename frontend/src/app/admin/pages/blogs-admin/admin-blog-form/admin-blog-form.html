@@ -1,1 +1,101 @@
-<p>admin-blog-form works!</p>
+<div class="blog-list-form">
+  <h3>{{ editingId() ? 'Edit Blog' : 'Add Blog' }}</h3>
+  <form class="blog-form" (submit)="$event.preventDefault(); submitBlog()">
+    <div class="input-box">
+      <div class="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          placeholder="Blog Title"
+          [value]="blogs().title"
+          (input)="updateTitle($any($event.target).value)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Slug</label>
+        <input type="text" [value]="blogs().slug" readonly />
+      </div>
+    </div>
+
+    <div class="input-box">
+      <div class="form-group">
+        <label>Blog Image</label>
+        <input type="file" accept="image/*" (change)="onImageSelected($event)" />
+
+        @if (imagePreview()) {
+          <div class="image-preview-box">
+            <img class="preview-img" [src]="imagePreview()" alt="Blog Preview" />
+
+            <button type="button" class="remove-image-btn" (click)="removeImage()">
+              <lucide-icon name="x" [size]="16"></lucide-icon>
+            </button>
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Excerpt</label>
+        <input
+          type="text"
+          placeholder="Short blog summary"
+          [value]="blogs().excerpt"
+          (input)="updateField('excerpt', $any($event.target).value)"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+        <div class="tag-input">
+          <input
+            type="text"
+            placeholder="Tags"
+            [value]="tagsInput()"
+            (input)="tagsInput.set($any($event.target).value)"
+            (keydown.enter)="addTags(); $event.preventDefault()"
+          />
+
+          <button type="button" (click)="addTags()">Add</button>
+        </div>
+
+        <div class="tag-list">
+          @for (tag of blogs().tags; track tag; let i = $index) {
+            <span>
+              {{ tag }}
+              <button type="button" (click)="removeTag(i)">
+                <lucide-icon name="x" [size]="16"></lucide-icon>
+              </button>
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <label>Content</label>
+    <textarea
+      rows="4"
+      placeholder="Blog content"
+      [value]="blogs().content"
+      (input)="updateField('content', $any($event.target).value)"
+    ></textarea>
+
+    <div class="form-group published-box">
+      <label>Published</label>
+
+      <div class="checkbox-wrapper">
+        <input
+          type="checkbox"
+          [checked]="blogs().published"
+          (change)="updateField('published', $any($event.target).checked)"
+        />
+        <span>Make this blog public</span>
+      </div>
+    </div>
+
+    <div class="button-box">
+      <button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Saving...' : editingId() ? 'Update Blog' : 'Create Blog' }}
+      </button>
+    </div>
+  </form>
+</div>

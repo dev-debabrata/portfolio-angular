@@ -1,0 +1,37 @@
+@if (blog()) {
+  <div class="project-detail">
+    <img
+      [src]="blog()?.image"
+      alt="project image"
+      class="project-image"
+      (click)="imagePopup.set(true)"
+    />
+
+    <div class="project-content">
+      <h2>{{ blog()?.title }}</h2>
+
+      <p class="description">
+        {{ blog()?.content }}
+      </p>
+
+      <div class="tech-list">
+        @for (tag of blog()?.tags; track tag) {
+          <span class="tech-badge">{{ tag }}</span>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+@if (imagePopup()) {
+  <div class="image-popup" (click)="imagePopup.set(false)">
+    <button class="close-btn" (click)="imagePopup.set(false)">×</button>
+
+    <img
+      [src]="blog()?.image"
+      alt="project full image"
+      class="popup-image"
+      (click)="$event.stopPropagation()"
+    />
+  </div>
+}

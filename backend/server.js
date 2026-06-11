@@ -9,8 +9,8 @@ import experienceRoutes from "./routes/experience.route.js";
 import educationRoutes from "./routes/education.route.js";
 import profileRoutes from "./routes/profile.route.js";
 import projectRoutes from "./routes/project.route.js";
-// import contactRoutes from "./routes/contact.route.js";
-// import blogRoutes from "./routes/blog.route.js";
+import contactRoutes from "./routes/contact.route.js";
+import blogRoutes from "./routes/blog.route.js";
 
 dotenv.config();
 
@@ -33,8 +33,8 @@ app.use("/api/skills", skillRoutes);
 app.use("/api/experiences", experienceRoutes);
 app.use("/api/educations", educationRoutes);
 app.use("/api/projects", projectRoutes);
-// app.use("/api/contact", contactRoutes);
-// app.use("/api/blogs", blogRoutes);
+app.use("/api/contact", contactRoutes);
+app.use("/api/blogs", blogRoutes);
 
 const startServer = async () => {
   try {
@@ -49,16 +49,3 @@ const startServer = async () => {
 };
 
 startServer();
-
-// app.get("/", (req, res) => {
-//   res.send("Portfolio backend is running...");
-// });
-
-// app.listen(PORT, () => {
-//   connectDB();
-//   console.log("Server is running on port: ", PORT);
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });

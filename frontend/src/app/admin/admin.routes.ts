@@ -5,6 +5,7 @@ import { adminGuard } from '../core/guards/admin-guard';
 import { AdminLogin } from './auth/admin-login/admin-login';
 import { DashboardAdmin } from './pages/dashboard-admin/dashboard-admin';
 import { AdminProjectList } from './pages/projects-admin/admin-project-list/admin-project-list';
+import { AdminBlogList } from './pages/blogs-admin/admin-blog-list/admin-blog-list';
 
 export const ADMIN_ROUTES: Routes = [
   {
@@ -29,12 +30,19 @@ export const ADMIN_ROUTES: Routes = [
       },
 
       {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/profile-admin/profile-admin').then((m) => m.ProfileAdmin),
+      },
+
+      {
         path: 'projects',
         children: [
           {
             path: '',
             component: AdminProjectList,
           },
+
           {
             path: 'add',
             loadComponent: () =>
@@ -60,18 +68,39 @@ export const ADMIN_ROUTES: Routes = [
           },
         ],
       },
-      {
-        path: 'blogs',
-        loadComponent: () =>
-          import('./pages/blogs-admin/admin-blog-list/admin-blog-list').then(
-            (m) => m.AdminBlogList,
-          ),
-      },
 
       {
-        path: 'profile',
-        loadComponent: () =>
-          import('./pages/profile-admin/profile-admin').then((m) => m.ProfileAdmin),
+        path: 'blogs',
+        children: [
+          {
+            path: '',
+            component: AdminBlogList,
+          },
+
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./pages/blogs-admin/admin-blog-form/admin-blog-form').then(
+                (m) => m.AdminBlogForm,
+              ),
+          },
+
+          {
+            path: 'edit/:slug',
+            loadComponent: () =>
+              import('./pages/blogs-admin/admin-blog-form/admin-blog-form').then(
+                (m) => m.AdminBlogForm,
+              ),
+          },
+
+          {
+            path: ':slug',
+            loadComponent: () =>
+              import('./pages/blogs-admin/admin-blog-detail/admin-blog-detail').then(
+                (m) => m.AdminBlogDetail,
+              ),
+          },
+        ],
       },
     ],
   },
